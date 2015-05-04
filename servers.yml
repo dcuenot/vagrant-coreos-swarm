@@ -1,0 +1,25 @@
+---
+
+- name: reference
+  box: coreos-stable
+  ram: 256
+  vcpu: 1
+  priv_ip: 192.168.101.102
+  etcd: inactive
+  
+- name: production-01
+  box: coreos-stable
+  ram: 256
+  vcpu: 1
+  priv_ip: 192.168.101.120
+  etcd: active
+- name: production-02
+  box: coreos-stable
+  ram: 256
+  vcpu: 1
+  priv_ip: 192.168.101.121
+  etcd: active
+
+
+
+
