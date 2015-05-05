@@ -1,0 +1,16 @@
+# Fonctionnement standard
+
+docker
+
+docker logs --tail=3 -f swarm
+
+
+http://ref:4001/v2/keys/?recursive=true
+
+http://ref:5000/v2/swarm/tags/list
+
+
+
+# Registry
+docker tag jpetazzo/clock ref:5000/clock
+docker push !$
