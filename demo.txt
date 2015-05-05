@@ -1,10 +1,27 @@
 # Fonctionnement standard
 
-docker
+docker run ref:5000/clock
+docker run -d ref:5000/clock
+docker logs --tail=3 -f $ID
 
-docker logs --tail=3 -f swarm
+
+docker run --name ubuntu_bash --rm -i -t ubuntu:14.04 bash
+docker exec -d ubuntu_bash touch /tmp/out
+docker exec -it ubuntu_bash bash
+
+docker top ubuntu_bash
+docker stats
+docker info
+
+# DockerFile (java)
+cd /vagrant/files/java
+docker build -t ref:5000/my-java-app .
+
+# Lien entre containeurs
+docker run -d -ti mysql --name some-mysql
 
 
+# Cluster Swarm
 http://ref:4001/v2/keys/?recursive=true
 
 http://ref:5000/v2/swarm/tags/list

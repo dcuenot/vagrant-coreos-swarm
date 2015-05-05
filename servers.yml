@@ -39,10 +39,12 @@
   priv_ip: 192.168.101.121
   shell: >
     if ! command -v docr; then wget -qO- https://get.docker.com/ | sh; fi
+    sudo iptables -P INPUT ACCEPT; sudo iptables -P OUTPUT ACCEPT; sudo iptables -P FORWARD ACCEPT; sudo iptables -F;
+    
     echo '192.168.101.102 ref' | sudo tee --append /etc/hosts;
-    echo 'DOCKER_OPTS="$DOCKER_OPTS --insecure-registry ref:5000"' | sudo tee --append /etc/default/docker;
+    echo 'DOCKER_OPTS="$DOCKER_OPTS -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock --insecure-registry ref:5000"' | sudo tee --append /etc/default/docker;
     sudo service docker restart;
     sudo docker run -d  --name swarm ref:5000/swarm join --addr=192.168.101.121:2375 etcd://192.168.101.102:4001/swarm || sudo docker start swarm;
-    sudo iptables -P INPUT ACCEPT; sudo iptables -P OUTPUT ACCEPT; sudo iptables -P FORWARD ACCEPT; sudo iptables -F;
+    
 
 #https://github.com/JustAdam/docker-gen-swarm
